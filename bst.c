@@ -54,7 +54,7 @@ void main()
             printf("\n");
             break;
         case 5:
-            exit(0); // Exit the program
+            exit(0); 
         default:
             printf("Invalid choice. Please try again.\n");
         }
@@ -68,35 +68,35 @@ struct node *insert(struct node *root, int data)
     t = (struct node *)malloc(sizeof(struct node));
     t->data = data;
     t->left = t->right = NULL;
+    
     if (root == NULL)
-    {
         root = t;
-    }
     else
     {
         while (t1 != NULL && t1->data != data)
         {
             if (data < t1->data)
             {
-                if (t1->left == NULL)
-                { // If left child is null, insert here
+                if (t1->left == NULL)// If left child is null, insert here
+                { 
                     t1->left = t;
                     break;
                 }
                 t1 = t1->left; // Move to left subtree
             }
             else
-            { // data > t1->data
-                if (t1->right == NULL)
-                { // If right child is null, insert here
+            { 
+                if (t1->right == NULL)// If right child is null, insert here
+                { 
                     t1->right = t;
                     break;
                 }
                 t1 = t1->right; // Move to right subtree
             }
         }
-        if (t1 != NULL && t1->data == data)
-        { // Check for duplicates *after* the loop
+        
+        if (t1 != NULL && t1->data == data) // Check for duplicates *after* the loop
+        {
             printf("Duplicate element not allowed\n");
             free(t);
         }
@@ -107,7 +107,7 @@ struct node *insert(struct node *root, int data)
 
 struct node *search(struct node *root, int data)
 {
-    while (root != NULL && root->data != data) // Corrected comparison
+    while (root != NULL && root->data != data) 
     {
         if (data < root->data)
             root = root->left;
@@ -136,20 +136,16 @@ struct node *delete(struct node *root, int data)
         return root;
     }
 
-    if (t1->left == NULL && t1->right == NULL)
-    { // Case 1: Node has no children
-        if (t2 == NULL)
-        {                // If the node to delete is the root
-            root = NULL; // Set root to NULL, the tree is now empty
-        }
+    if (t1->left == NULL && t1->right == NULL) // Case1: Node  has no children
+    {
+        if (t2 == NULL)   // If the node to delete is the root
+            root = NULL; 
         else
-        {
             if (t2->left == t1)  // If t1 is the left child of t2
-                t2->left = NULL; // Set t2's left child to NULL
+                t2->left = NULL; 
             else
-                t2->right = NULL; // Set t2's right child to NULL
-        }
-        free(t1); // Free the memory for t1
+                t2->right = NULL; 
+        free(t1); 
     }
 
     else if (t1->left == NULL || t1->right == NULL) // Case 2: Node has one child
@@ -157,16 +153,17 @@ struct node *delete(struct node *root, int data)
         struct node *child = (t1->left != NULL) ? t1->left : t1->right; // Determine which child exists
 
         if (t2 == NULL)          // If the node to delete is the root
-            root = child;        // Set root to the existing child
+            root = child;       
         else if (t2->left == t1) // If t1 is the left child of t2
-            t2->left = child;    // Replace t1 with its child
+            t2->left = child;    
         else
             t2->right = child; // Replace t1 with its child
 
         free(t1); // Free the memory for t1
     }
-    else
-    { // Case 3: Node has two children
+    
+    else // Case 3: Node has two children
+    {
         struct node *sucpar = t1;
         struct node *t2 = t1->right;
         while (t2->left != NULL)
@@ -176,26 +173,21 @@ struct node *delete(struct node *root, int data)
         }
         t1->data = t2->data;
         if (sucpar->left == t2)
-        {
             sucpar->left = t2->right;
-        }
         else
-        {
             sucpar->right = t2->right;
-        }
-
         free(t2);
     }
 
     return root;
 }
 
-// Function to display the BST in inorder (sorted order) - Corrected for Left-Right order
+// Function to display the BST in inorder (sorted order)
 void display(struct node *root)
 {
     if (root != NULL)
     {
-        display(root->left); // Correct order for inorder traversal
+        display(root->left); 
         printf("%d ", root->data);
         display(root->right);
     }

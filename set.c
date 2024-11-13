@@ -1,69 +1,102 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int uset[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, SIZE = 9;
 
-int universal_set[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, SIZE=9;
+// Function prototypes, now with correct types
+void readset(bit s[], int n);
+void printset(bit s[]);
+void set_union(bit a[], bit b[], bit c[]);
+void set_intersection(bit a[], bit b[], bit c[]);
+void set_difference(bit a[], bit b[], bit c[]);
 
 
-// Function prototypes
-void readset();
-void printset(Set s);
-void set_union(Set a, Set b);
-void set_intersection(Set a, Set b);
-void set_difference(Set a, Set b);
+typedef struct {
+    unsigned char x : 1;
+} bit;
 
-typedef struct {unsigned char x:1} bit;
-
-void main()
+int main()  // Corrected return type to int
 {
-    bit a[10]={0}, b[10]={0},c[10]={0};
-
+    bit a[10] = {0}, b[10] = {0}, c[10] = {0};
     int n;
 
-    printf("no.of elements in set A:")
-    scanf("%d",&n)
-
-    printset(set_union(setA, setB));
-    printset(set_intersection(setA, setB));
-    printset(set_difference(setA, setB));
+    printf("no.of elements in set A:");
+    scanf("%d", &n);
+    readset(a, n);  // Pass n to readset
+    printf("no.of elements in set B:");
+    scanf("%d", &n);
+    readset(b, n);  // Pass n to readset
+    system("cls"); // Or "clear" depending on your system Corrected string for system()
     printf("Set A: ");
-    printset(setA);
+    printset(a);
     printf("Set B: ");
-    printset(setB);
+    printset(b);
+
+    set_union(a, b, c);       // Use c to store the result
+    printf("Set Union: ");
+    printset(c);
+
+    set_intersection(a, b, c); // Use c to store the result
+    printf("Set Intersection: ");
+    printset(c);
+
+    set_difference(a, b, c);  // Use c to store the result
+    printf("Set Difference (A-B): ");
+    printset(c);
+
+    return 0; // Added return 0 for good practice
 }
 
 
-// Function to print a set
-void printset(Set s)
+
+void printset(bit s[])
 {
-for(i=0;i<SIZE;i++)
-if(s[k].Set==u[k])
-print("%d",u[k]);
+    int k;
+    printf("{");
+    for (k = 0; k <= SIZE; k++) // Corrected loop condition, added =,  corrected k 
+        if (s[k].x == 1) // Corrected comparison operator
+            printf("%d", uset[k]);
+    printf("}\n");
 }
 
-// Function to print a set
-void readset(Set s)
+void readset(bit s[], int n) // Added n as a parameter
 {
-for(i=0;i<SIZE;i++)
-if(s[k].Set==u[k])
-scaf("%d",&u[k]);
+    int i, x, k;
+    printf("enter %d elements: ",n);
+    for (i = 0; i < n; i++) {
+        scanf("%d", &x);
+        for (k = 0; k <= SIZE; k++) { //Corrected the loop condition, added =
+            if (uset[k] == x) {
+                s[k].x = 1;
+                break;
+            }
+        }
+    }
 }
 
-// Function to calculate the union of two sets
-Set set_union(Set a, Set b)
+
+void set_union(bit a[], bit b[], bit c[])
 {
-    return a | b;
+    int i;
+    for(i=0; i<=SIZE; i++) {  // Corrected loop condition
+        c[i].x = a[i].x | b[i].x;
+    }
 }
 
-// Function to calculate the intersection of two sets
-Set set_intersection(Set a, Set b)
+void set_intersection(bit a[], bit b[], bit c[])
 {
-    return a & b;
+    int i;
+    for(i=0; i<=SIZE; i++) { // Corrected loop condition
+        c[i].x = a[i].x & b[i].x;
+    }
+
 }
 
-// Function to calculate the difference of two sets (A - B)
-Set set_difference(Set a, Set b)
+
+void set_difference(bit a[], bit b[], bit c[])
 {
-  return a & b;
+    int i;
+    for(i=0; i<=SIZE; i++) { // Corrected loop condition
+        c[i].x = a[i].x & !b[i].x; // Corrected to A-B logic.
+    }
 }
-

@@ -96,7 +96,8 @@ void set_intersection(bit a[], bit b[], bit c[])
 void set_difference(bit a[], bit b[], bit c[])
 {
     int i;
-    for(i=0; i<=SIZE; i++) { // Corrected loop condition
-        c[i].x = a[i].x & !b[i].x; // Corrected to A-B logic.
+    for(i=0; i<=SIZE; ++i) { // Corrected loop condition
+    if (a[i].x == 1) 
+        c[i].x = a[i].x ^ b[i].x; // Corrected to A-B logic.
     }
 }

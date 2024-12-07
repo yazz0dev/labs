@@ -94,15 +94,6 @@
             background-color: #388e3c;
         }
 
-        #retest-btn {
-            background-color: #1976d2;
-            margin-top: 10px;
-        }
-
-        button#retest-btn:hover {
-            background-color: #115293;
-        }
-
         .result {
             font-size: 1.2rem;
             font-weight: bold;
@@ -121,109 +112,178 @@
             border: 1px solid #f44336 !important;
             text-decoration: line-through;
         }
-
-        .congrats-message {
-            margin-top: 15px;
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #4caf50;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
     <div class="quiz-container">
         <h1>Web Development Quiz</h1>
-        <div id="quiz"></div>
-        <button id="submit-btn" onclick="submitQuiz()">Submit</button>
-        <button id="retest-btn" onclick="retestQuiz()" style="display: none;">Retake Quiz</button>
+        <form id="quiz-form">
+            <!-- Question 1 -->
+            <div class="question">
+                <p>1. HTML stands for?</p>
+                <div class="options">
+                    <input type="radio" id="q1-option1" name="q1" value="HyperText">
+                    <label for="q1-option1">HyperText</label>
+                    <input type="radio" id="q1-option2" name="q1" value="HighText">
+                    <label for="q1-option2">HighText</label>
+                    <input type="radio" id="q1-option3" name="q1" value="Markup">
+                    <label for="q1-option3">Markup</label>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <p>2. CSS stands for?</p>
+                <div class="options">
+                    <input type="radio" id="q2-option1" name="q2" value="Cascading">
+                    <label for="q2-option1">Cascading</label>
+                    <input type="radio" id="q2-option2" name="q2" value="Common">
+                    <label for="q2-option2">Common</label>
+                    <input type="radio" id="q2-option3" name="q2" value="Counter">
+                    <label for="q2-option3">Counter</label>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <p>3. JS stands for?</p>
+                <div class="options">
+                    <input type="radio" id="q3-option1" name="q3" value="JavaScript">
+                    <label for="q3-option1">JavaScript</label>
+                    <input type="radio" id="q3-option2" name="q3" value="JavaSuper">
+                    <label for="q3-option2">JavaSuper</label>
+                    <input type="radio" id="q3-option3" name="q3" value="JustScript">
+                    <label for="q3-option3">JustScript</label>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question">
+                <p>4. A framework of JS?</p>
+                <div class="options">
+                    <input type="radio" id="q4-option1" name="q4" value="React">
+                    <label for="q4-option1">React</label>
+                    <input type="radio" id="q4-option2" name="q4" value="Vue">
+                    <label for="q4-option2">Vue</label>
+                    <input type="radio" id="q4-option3" name="q4" value="Angular">
+                    <label for="q4-option3">Angular</label>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <p>5. Keyword to define variable?</p>
+                <div class="options">
+                    <input type="radio" id="q5-option1" name="q5" value="var">
+                    <label for="q5-option1">var</label>
+                    <input type="radio" id="q5-option2" name="q5" value="let">
+                    <label for="q5-option2">let</label>
+                    <input type="radio" id="q5-option3" name="q5" value="const">
+                    <label for="q5-option3">const</label>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question">
+                <p>6. Non-Primitive data type?</p>
+                <div class="options">
+                    <input type="radio" id="q6-option1" name="q6" value="Array">
+                    <label for="q6-option1">Array</label>
+                    <input type="radio" id="q6-option2" name="q6" value="Number">
+                    <label for="q6-option2">Number</label>
+                    <input type="radio" id="q6-option3" name="q6" value="String">
+                    <label for="q6-option3">String</label>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question">
+                <p>7. Git command to add changes?</p>
+                <div class="options">
+                    <input type="radio" id="q7-option1" name="q7" value="add">
+                    <label for="q7-option1">add</label>
+                    <input type="radio" id="q7-option2" name="q7" value="push">
+                    <label for="q7-option2">push</label>
+                    <input type="radio" id="q7-option3" name="q7" value="commit">
+                    <label for="q7-option3">commit</label>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question">
+                <p>8. A library of JS?</p>
+                <div class="options">
+                    <input type="radio" id="q8-option1" name="q8" value="Jquery">
+                    <label for="q8-option1">Jquery</label>
+                    <input type="radio" id="q8-option2" name="q8" value="Flask">
+                    <label for="q8-option2">Flask</label>
+                    <input type="radio" id="q8-option3" name="q8" value="Django">
+                    <label for="q8-option3">Django</label>
+                </div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question">
+                <p>9. To make webpage interactive we use?</p>
+                <div class="options">
+                    <input type="radio" id="q9-option1" name="q9" value="JavaScript">
+                    <label for="q9-option1">JavaScript</label>
+                    <input type="radio" id="q9-option2" name="q9" value="HTML">
+                    <label for="q9-option2">HTML</label>
+                    <input type="radio" id="q9-option3" name="q9" value="CSS">
+                    <label for="q9-option3">CSS</label>
+                </div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question">
+                <p>10. To style webpage we use?</p>
+                <div class="options">
+                    <input type="radio" id="q10-option1" name="q10" value="CSS">
+                    <label for="q10-option1">CSS</label>
+                    <input type="radio" id="q10-option2" name="q10" value="HTML">
+                    <label for="q10-option2">HTML</label>
+                    <input type="radio" id="q10-option3" name="q10" value="JavaScript">
+                    <label for="q10-option3">JavaScript</label>
+                </div>
+            </div>
+
+            <button type="button" onclick="submitQuiz()">Submit</button>
+        </form>
         <div id="result" class="result"></div>
     </div>
 
     <script>
-        const questions = [
-        { question: "HTML stands for?", answer: "HyperText", options: ["HyperText", "HighText", "Markup"] },
-        { question: "CSS stands for?", answer: "Cascading", options: ["Cascading", "Common", "Counter"] },
-        { question: "JS stands for?", answer: "JavaScript", options: ["JavaScript", "JavaSuper", "JustScript"] },
-        { question: "A framework of JS?", answer: "React", options: ["React", "Vue", "Angular"] },
-        { question: "Keyword to define variable", answer: "var", options: ["var", "let", "const"] },
-        { question: "Non-Primitive data type?", answer: "Array", options: ["Array", "Number", "String"] },
-        { question: "Git command to add changes?", answer: "add", options: ["add", "push", "commit"] },
-        { question: "A library of JS?", answer: "Jquery", options: ["Jquery", "Flask", "Django"] },
-        { question: "To make webpage interactive we use?", answer: "JavaScript", options: ["JavaScript", "HTML", "CSS"] },
-        { question: "To style webpage we use?", answer: "CSS", options: ["CSS", "HTML", "JavaScript"] }
-    ];
-        function generateQuiz() {
-            const quizContainer = document.getElementById('quiz');
-            quizContainer.innerHTML = '';
-            const randomQuestions = getRandomQuestions(questions, 10);
-
-            randomQuestions.forEach((q, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.classList.add('question');
-                questionDiv.innerHTML = `
-                    <p>${index + 1}. ${q.question}</p>
-                    <div class="options">
-                        ${q.options.map(option => `
-                            <input type="radio" id="q${index}-${option}" name="q${index}" value="${option}">
-                            <label for="q${index}-${option}">${option}</label>
-                        `).join('')}
-                    </div>
-                `;
-                quizContainer.appendChild(questionDiv);
-            });
-        }
-
-        function getRandomQuestions(arr, num) {
-            const shuffled = arr.sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, num);
-        }
-
         function submitQuiz() {
-            const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = '';
-            let correctCount = 0;
+            const answers = {
+                q1: "HyperText",
+                q2: "Cascading",
+                q3: "JavaScript",
+                q4: "React",
+                q5: "var",
+                q6: "Array",
+                q7: "add",
+                q8: "Jquery",
+                q9: "JavaScript",
+                q10: "CSS",
+            };
 
-            for (let i = 0; i < 10; i++) {
-                const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+            const form = document.getElementById('quiz-form');
+            let score = 0;
+            let total = Object.keys(answers).length;
+
+            for (const question in answers) {
+                const selectedOption = form[question];
                 if (selectedOption) {
-                    const questionText = document.querySelectorAll('.question p')[i].textContent.substring(3).trim();
-                    const question = questions.find(q => q.question === questionText);
-
-                    const correctAnswer = question.answer;
-                    const options = document.querySelectorAll(`input[name="q${i}"]`);
-
-                    options.forEach(option => {
-                        const label = option.nextElementSibling;
-                        if (option.value === correctAnswer) {
-                            label.classList.add('highlight-correct');
-                            if (option.checked) correctCount++;
-                        } else if (option.checked) {
-                            label.classList.add('highlight-incorrect');
-                        }
-                    });
+                    const chosenAnswer = [...selectedOption].find(input => input.checked)?.value;
+                    if (chosenAnswer === answers[question]) {
+                        score++;
+                    }
                 }
             }
 
-            resultDiv.innerHTML = `Score: ${correctCount}/10`;
-            if (correctCount === 10) {
-                const congratsMessage = document.createElement('div');
-                congratsMessage.classList.add('congrats-message');
-                congratsMessage.textContent = "🎉 Perfect Score! You're a Web Development Pro! 🎉";
-                resultDiv.appendChild(congratsMessage);
-            }
-            document.getElementById('submit-btn').style.display = 'none';
-            document.getElementById('retest-btn').style.display = 'block';
+            document.getElementById('result').textContent = `Score: ${score}/${total}`;
         }
-
-        function retestQuiz() {
-            generateQuiz();
-            document.getElementById('submit-btn').style.display = 'block';
-            document.getElementById('retest-btn').style.display = 'none';
-            document.getElementById('result').innerHTML = '';
-        }
-
-        generateQuiz();
     </script>
 </body>
 </html>

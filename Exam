@@ -69,12 +69,13 @@
             border-color: #007bff;
         }
 
-        .correct-answer {
+        /* Styles for selected options only */
+        .options input[type="radio"]:checked + label.correct-answer {
             background-color: #d4edda !important; /* Correct answer color */
             border-color: #28a745 !important;
         }
 
-        .wrong-answer {
+        .options input[type="radio"]:checked + label.wrong-answer {
             background-color: #f8d7da !important; /* Incorrect answer color */
             border-color: #dc3545 !important;
         }
@@ -104,10 +105,11 @@
             margin-top: 20px;
             color: #444;
         }
-.unanswered {
-    background-color: #f8f4e6; /* Light orange background for unanswered questions */
-    border-color: #ffb84d; /* Orange border color */
-}
+
+        .unanswered {
+            background-color: #f8f4e6; /* Light orange background for unanswered questions */
+            border-color: #ffb84d; /* Orange border color */
+        }
     </style>
 </head>
 <body>
@@ -207,6 +209,7 @@
             <button type="button" onclick="submitQuiz()">Submit</button>
         </form>
         <div id="result"></div>
+        <button type="button" id="retakeButton" onclick="retakeQuiz()" style="display: none;">Retake Quiz</button>
     </div>
 
     <script>
@@ -224,48 +227,64 @@
         };
 
         function submitQuiz() {
-    const form = document.getElementById("quiz-form");
-    const resultDiv = document.getElementById("result");
-    let score = 0;
+            const form = document.getElementById("quiz-form");
+            const resultDiv = document.getElementById("result");
+            const retakeButton = document.getElementById("retakeButton");
+            let score = 0;
 
-    for (const [question, correctAnswer] of Object.entries(answers)) {
-        const options = form[question];
-        const selected = [...options].find(option => option.checked);
-        const labels = document.querySelectorAll(`input[name="${question}"] + label`);
-        
-        // Reset any previous highlights
-        labels.forEach(label => label.classList.remove("correct-answer", "wrong-answer"));
-        
-        // Highlight unanswered questions
-        const questionContainer = options[0].closest('.question');
-        questionContainer.classList.remove('unanswered'); // Remove previous orange highlight
-        if (!selected) {
-            questionContainer.classList.add('unanswered'); // Highlight unanswered question
-        }
+            for (const [question, correctAnswer] of Object.entries(answers)) {
+                const options = form[question];
+                const selected = [...options].find(option => option.checked);
+                const labels = document.querySelectorAll(`input[name="${question}"] + label`);
 
-        if (selected) {
-            const label = selected.nextElementSibling;
-            if (selected.value === correctAnswer) {
-                label.classList.add("correct-answer");
-                score++;
-            } else {
-                label.classList.add("wrong-answer");
+                // Reset any previous highlights
+                labels.forEach(label => label.classList.remove("correct-answer", "wrong-answer"));
+
+                // Highlight unanswered questions
+                const questionContainer = options[0].closest('.question');
+                questionContainer.classList.remove('unanswered'); // Remove previous orange highlight
+                if (!selected) {
+                    questionContainer.classList.add('unanswered'); // Highlight unanswered question
+                }
+
+                if (selected) {
+                    const label = selected.nextElementSibling;
+                    if (selected.value === correctAnswer) {
+                        label.classList.add("correct-answer");
+                        score++;
+                    } else {
+                        label.classList.add("wrong-answer");
+                    }
+                }
+
+                // Disable options after quiz submission
+                [...options].forEach(option => (option.disabled = true));
             }
+
+            resultDiv.textContent = `Your score: ${score}/${Object.keys(answers).length}`;
+            retakeButton.style.display = "block"; // Show the retake button
         }
 
-        // Highlight correct answer
-        const correctOption = [...options].find(option => option.value === correctAnswer);
-        if (correctOption) {
-            const correctLabel = correctOption.nextElementSibling;
-            correctLabel.classList.add("correct-answer");
+        function retakeQuiz() {
+            const form = document.getElementById("quiz-form");
+            const resultDiv = document.getElementById("result");
+            const retakeButton = document.getElementById("retakeButton");
+
+            // Reset form and result
+            form.reset();
+            resultDiv.textContent = "";
+            retakeButton.style.display = "none"; // Hide the retake button
+
+            // Remove highlights and enable options
+            const allLabels = document.querySelectorAll(`.options label`);
+            allLabels.forEach(label => label.classList.remove("correct-answer", "wrong-answer"));
+            const allOptions = document.querySelectorAll(`.options input[type="radio"]`);
+            allOptions.forEach(option => (option.disabled = false));
+
+            // Remove unanswered question highlights
+            const questionContainers = document.querySelectorAll('.question');
+            questionContainers.forEach(container => container.classList.remove('unanswered'));
         }
-
-        // Disable options after quiz submission
-        [...options].forEach(option => (option.disabled = true));
-    }
-
-    resultDiv.textContent = `Your score: ${score}/${Object.keys(answers).length}`;
-}
     </script>
 </body>
 </html>

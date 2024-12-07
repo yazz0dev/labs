@@ -79,7 +79,12 @@
             background-color: #f8d7da !important; /* Incorrect answer color */
             border-color: #dc3545 !important;
         }
-
+.button-container {
+            display: flex;
+            justify-content: space-between; /* Distribute buttons evenly */
+            align-items: center;
+            margin-top: 20px;
+        }
         button {
             display: block;
             width: 100%;
@@ -206,7 +211,10 @@
                     <label for="q10-option2">HTML</label>
                 </div>
             </div>
-            <button type="button" onclick="submitQuiz()">Submit</button>
+            <div class="button-container">
+                <button type="button" onclick="submitQuiz()">Submit</button>
+                <button type="button" id="retakeButton" onclick="retakeQuiz()" style="display: none;">Retake Quiz</button>
+            </div>
         </form>
         <div id="result"></div>
         <button type="button" id="retakeButton" onclick="retakeQuiz()" style="display: none;">Retake Quiz</button>

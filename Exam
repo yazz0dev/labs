@@ -104,6 +104,10 @@
             margin-top: 20px;
             color: #444;
         }
+.unanswered {
+    background-color: #f8f4e6; /* Light orange background for unanswered questions */
+    border-color: #ffb84d; /* Orange border color */
+}
     </style>
 </head>
 <body>
@@ -220,40 +224,48 @@
         };
 
         function submitQuiz() {
-            const form = document.getElementById("quiz-form");
-            const resultDiv = document.getElementById("result");
-            let score = 0;
+    const form = document.getElementById("quiz-form");
+    const resultDiv = document.getElementById("result");
+    let score = 0;
 
-            for (const [question, correctAnswer] of Object.entries(answers)) {
-                const options = form[question];
-                const selected = [...options].find(option => option.checked);
-                const labels = document.querySelectorAll(`input[name="${question}"] + label`);
-
-                labels.forEach(label => label.classList.remove("correct-answer", "wrong-answer"));
-
-                if (selected) {
-                    const label = selected.nextElementSibling;
-                    if (selected.value === correctAnswer) {
-                        label.classList.add("correct-answer");
-                        score++;
-                    } else {
-                        label.classList.add("wrong-answer");
-                    }
-                }
-
-                // Highlight correct answer
-                const correctOption = [...options].find(option => option.value === correctAnswer);
-                if (correctOption) {
-                    const correctLabel = correctOption.nextElementSibling;
-                    correctLabel.classList.add("correct-answer");
-                }
-
-                // Disable options
-                [...options].forEach(option => (option.disabled = true));
-            }
-
-            resultDiv.textContent = `Your score: ${score}/${Object.keys(answers).length}`;
+    for (const [question, correctAnswer] of Object.entries(answers)) {
+        const options = form[question];
+        const selected = [...options].find(option => option.checked);
+        const labels = document.querySelectorAll(`input[name="${question}"] + label`);
+        
+        // Reset any previous highlights
+        labels.forEach(label => label.classList.remove("correct-answer", "wrong-answer"));
+        
+        // Highlight unanswered questions
+        const questionContainer = options[0].closest('.question');
+        questionContainer.classList.remove('unanswered'); // Remove previous orange highlight
+        if (!selected) {
+            questionContainer.classList.add('unanswered'); // Highlight unanswered question
         }
+
+        if (selected) {
+            const label = selected.nextElementSibling;
+            if (selected.value === correctAnswer) {
+                label.classList.add("correct-answer");
+                score++;
+            } else {
+                label.classList.add("wrong-answer");
+            }
+        }
+
+        // Highlight correct answer
+        const correctOption = [...options].find(option => option.value === correctAnswer);
+        if (correctOption) {
+            const correctLabel = correctOption.nextElementSibling;
+            correctLabel.classList.add("correct-answer");
+        }
+
+        // Disable options after quiz submission
+        [...options].forEach(option => (option.disabled = true));
+    }
+
+    resultDiv.textContent = `Your score: ${score}/${Object.keys(answers).length}`;
+}
     </script>
 </body>
 </html>

@@ -6,7 +6,7 @@
     <title>10-Question Quiz</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #f9f9f9;
             color: #333;
             display: flex;
@@ -38,6 +38,7 @@
         .question {
             margin-bottom: 20px;
             padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
         }
 
         .question p {
@@ -45,15 +46,18 @@
             margin-bottom: 10px;
         }
 
+        .options {
+            display: flex;
+            gap: 20px;
+        }
+
         .options label {
-            display: block;
-            margin: 5px 0;
-            padding: 10px 15px;
-            border: 1px solid #ddd;
+            padding: 10px 20px;
             border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: #f9f9f9;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .options input[type="radio"] {
@@ -66,15 +70,13 @@
         }
 
         .correct-answer {
-            background-color: #d4edda; /* Correct answer color */
-            border-color: #28a745;
-            color: #155724;
+            background-color: #d4edda !important; /* Correct answer color */
+            border-color: #28a745 !important;
         }
 
         .wrong-answer {
-            background-color: #f8d7da; /* Incorrect answer color */
-            border-color: #dc3545;
-            color: #721c24;
+            background-color: #f8d7da !important; /* Incorrect answer color */
+            border-color: #dc3545 !important;
         }
 
         button {

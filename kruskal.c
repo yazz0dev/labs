@@ -1,23 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
-int u, v, i, j, n, ru, rv, ne = 1;
+
+int u, v, i, j, n,ru,rv, ne = 1;
 int min, mincost = 0, cost[9][9], parent[9];
 
 // Function to find the set of an element
-int find()
+int find(int i) 
 {
-    while (parent[u])
-        u = parent[u];
-    return u;
+    while (parent[i])
+        i = parent[i];
+    return i;
 }
 
 // Function to perform union of two sets
-void uni()
+void uni(int i, int j) 
 {
-    parent[rv] = ru;
+    parent[j] = i; 
 }
 
-void main()
+void main() 
 {
     printf("Enter the no.of vertices: ");
     scanf("%d", &n);
@@ -49,15 +50,16 @@ void main()
                 }
             }
         }
-    ru = find(u);
-    rv = find(v);
-    if (ru != rv)
-    {
-        uni(ru, rv);
-        printf("%d edge (%d,%d) = %d\n", ne++, u, v, min);
-        mincost += min;
+        ru = find(u);
+        rv = find(v);
+        if (ru != rv)
+        {
+            uni(ru, rv);
+            printf("%d edge (%d,%d) = %d\n", ne++, u, v, min);
+            mincost += min;
+        }
+        cost[u][v] = cost[v][u] = 999;
     }
-    cost[u][v] = cost[v][u] = 999;
-}
-printf("\nMinimum cost = %d\n", mincost);
+    printf("\nMinimum cost = %d\n", mincost);
+   
 }

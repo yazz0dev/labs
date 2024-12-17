@@ -8,7 +8,6 @@ typedef struct node {
     struct node *point, *next;
 } node;
 
-int d[SIZE], f[SIZE], time;
 node *q[SIZE];
 int fr = 0, r = 0;
 node *g = NULL;
@@ -129,6 +128,4 @@ void main() {
     // Performing BFS starting from vertex 1
     bfs(find(1));
     
-
-
 }

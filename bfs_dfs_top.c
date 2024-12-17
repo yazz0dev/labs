@@ -171,61 +171,27 @@ enq(s);
  }
 }
 
-void main()
-{
-  int choice, u, V,n;
+void main() {
+    // Adding vertices
+    addV(1);
+    addV(2);
+    addV(3);
+    addV(4);
+    addV(5);
 
-    do {
-        printf("\n--- Graph Operations Menu ---\n");
-        printf("1. Add Vertex\n");
-        printf("2. Add Edge\n");
-        printf("3. Print Graph\n");
-        printf("4. Depth First Search \n");
-        printf("5. Breadth First Search\n");
-        printf("6. Topological Sort \n");
-        printf("7. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
+    // Adding edges
+    addE(1, 2);
+    addE(1, 3);
+    addE(2, 4);
+    addE(3, 5);
+    addE(4, 5);
 
-        switch (choice) {
-            case 1:
-                printf("Enter the vertex to add: ");
-                scanf("%d", &V);
-                addV(V);
-                break;
+    // Printing the graph
+    printG();
 
-            case 2:
-                printf("Enter the starting and ending vertices of the edge (u, v): ");
-                scanf("%d %d", &u, &V);
-                addE(u, V); 
-                break;
-
-            case 3:
-                printG();
-                break;
-
-            case 4:
-                printf("Enter the starting vertex for BFS: ");
-                scanf("%d", &n);
-                bfs(find(n));
-                break;
-
-            case 5:
-                printf("Enter the starting vertex for DFS: ");
-                scanf("%d", &n);
-                dfs(find(n));
-                break;              
-            case 6:
-                printf("TOPSORT : ");
-                topsortP();
-                break;   
-            case 7:
-                printf("Exiting...\n");
-                break;
-
-            default:
-                printf("Invalid choice. Please try again.\n");
-        }
-    } while (choice != 7);
-
+    // Performing BFS starting from vertex 1
+    bfs(find(1));
+    dfs(find(1));
+    topsortout(); 
+    
 }

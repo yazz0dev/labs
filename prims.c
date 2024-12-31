@@ -21,10 +21,12 @@ void main()
                 for (i = 1; i <= n; i++)
                     for (j = 1; j < n; j++)
                         if (cost[i][j] < min)
+                        {if(visited[i]!=0 && visited[j]==0)
                         {
                             min = cost[i][j];
                             u = i;
                             v = j;
+                        }
                         }
                 printf("\n edge %d: (%d %d) cost: %d", ne++, u, v, min);
                 mincost += min;

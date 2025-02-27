@@ -1,3 +1,0 @@
-Improve my prompt(mainly displaying text correctly):
-
-Create a professional and modern poster design for a 'Cyber Security & Al/ML Bootcamp'. The poster should prominently feature the bootcamp name 'Cyber Security & Al/ML Bootcamp' in large, bold text. Include the following details clearly and professionally: Organized by: National Institute of Electronics and Information Technology (NIELIT), Calicut; Venue: KMCT Engineering College ([Logo Placeholder] - include a placeholder for the KMCT logo); Dates: February 10th - 14th, 2025; Time: Daily 9:00 AM - 4:00 PM; Location: Seminar Hall.  Use a tech-related background theme and ensure all text is easily readable and well-formatted.

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DB Schema Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Kalam', cursive, sans-serif;
+            color: #191970; /* Midnight Blue */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .diagram-container {
+            position: relative;
+            width: 950px; /* Increased width */
+            height: 1250px; /* Increased height */
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .title {
+            text-align: left;
+            font-size: 2em;
+            margin: 20px 0 20px 40px;
+            font-weight: bold;
+        }
+
+        .table-box {
+            position: absolute;
+            border: 1px solid #666;
+            background-color: white;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+
+        .table-name {
+            font-weight: bold;
+            text-align: center;
+            padding: 8px;
+            border-bottom: 1px solid #666;
+        }
+
+        .table-columns {
+            padding: 15px 20px;
+        }
+
+        .table-columns ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .table-columns li {
+             margin-bottom: 4px;
+        }
+        
+        .fk-label {
+            position: absolute;
+            font-size: 1.1em;
+            background-color: white;
+            padding: 0 5px;
+            z-index: 3;
+            color: #191970;
+            text-align: center;
+        }
+
+        .svg-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="diagram-container">
+
+        <!-- Table Boxes -->
+        <div class="table-box" style="top: 100px; left: 100px; width: 220px;">
+            <div class="table-name">User</div>
+            <div class="table-columns">
+                <ul>
+                    <li>ID</li>
+                    <li>email</li>
+                    <li>name</li>
+                    <li>role</li>
+                    <li>availability</li>
+                    <li>stream</li>
+                    <li>Exam-score</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="table-box" style="top: 100px; left: 620px; width: 220px;">
+            <div class="table-name">Subject</div>
+            <div class="table-columns">
+                <ul>
+                    <li>ID</li>
+                    <li>name</li>
+                    <li>description</li>
+                    <li>duration</li>
+                    <li>assigned-kp-id</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="table-box" style="top: 400px; left: 320px; width: 250px;">
+            <div class="table-name">Student Progress</div>
+            <div class="table-columns">
+                <ul>
+                    <li>Student-id</li>
+                    <li>subject-id</li>
+                    <li>topic-path</li>
+                    <li>Status</li>
+                    <li>last-quiz-score</li>
+                    <li>last-studied-date</li>
+                    <li>study-session-completed</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="table-box" style="top: 700px; left: 100px; width: 250px;">
+            <div class="table-name">Content-Chucks</div>
+            <div class="table-columns">
+                <ul>
+                    <li>ID</li>
+                    <li>topic-id</li>
+                    <li>title</li>
+                    <li>Content</li>
+                    <li>Source.document-name</li>
+                    <li>Status</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="table-box" style="top: 700px; left: 600px; width: 220px;">
+            <div class="table-name">Topic</div>
+            <div class="table-columns">
+                <ul>
+                    <li>ID</li>
+                    <li>title</li>
+                    <li>next-topic-path</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="table-box" style="top: 980px; left: 500px; width: 250px;">
+            <div class="table-name">Student-Schedules</div>
+            <div class="table-columns">
+                <ul>
+                    <li>Student-id</li>
+                    <li>Subject-id</li>
+                    <li>Schedule-items</li>
+                    <li>last-updated-date</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Foreign Key Labels -->
+        <div class="fk-label" style="top: 145px; left: 450px;">Assigned<br>KP</div>
+        <div class="fk-label" style="top: 380px; left: 230px;">Student-id</div>
+        <div class="fk-label" style="top: 770px; left: 470px;">topic-id</div>
+
+
+        <!-- SVG for connecting lines -->
+        <svg class="svg-canvas">
+            <defs>
+                <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                    <polygon points="0 0, 8 3, 0 6" fill="#666"/>
+                </marker>
+            </defs>
+            
+            <!-- User to Subject (Diagonal) -->
+            <line x1="320" y1="180" x2="620" y2="130" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+            
+            <!-- User to Student Progress -->
+            <path d="M 210 280 L 210 490 L 320 490" stroke="#666" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+            
+            <!-- Subject to Student Progress -->
+            <path d="M 730 280 L 730 490 L 570 490" stroke="#666" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+            
+            <!-- Topic to Student Progress -->
+            <path d="M 600 750 C 570 650, 570 550, 570 490" stroke="#666" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+            
+            <!-- Content-Chucks to Topic (bidirectional) -->
+            <line x1="350" y1="780" x2="600" y2="780" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+            <line x1="600" y1="790" x2="350" y2="790" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+            <!-- User to Student Schedules -->
+            <path d="M 210 280 C 50 500, 150 900, 500 1010" stroke="#666" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+            
+            <!-- Subject to Student Schedules -->
+            <path d="M 730 280 C 900 500, 800 900, 750 1010" stroke="#666" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+
+            <!-- Topic to Subject (Long wrapper) -->
+            <path d="M 820 750 C 900 600, 900 200, 730 100 L 730 100" stroke="#666" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+
+        </svg>
+
+    </div>
+
+</body>
+</html>

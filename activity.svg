@@ -1,0 +1,176 @@
+<svg width="850" height="1300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Definitions for arrowhead -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto" fill="#333">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+  </defs>
+
+  <!-- Style block for elements -->
+  <style>
+    .action, .sub-action {
+      fill: #ffffff;
+      stroke: #333;
+      stroke-width: 1.5;
+    }
+    .decision {
+      fill: #ffffff;
+      stroke: #333;
+      stroke-width: 1.5;
+    }
+    .group-box {
+      fill: rgba(245, 245, 245, 0.5);
+      stroke: #333;
+      stroke-width: 1.5;
+      stroke-dasharray: 6 3;
+    }
+    .connector {
+      fill: none;
+      stroke: #333;
+      stroke-width: 1.5;
+      marker-end: url(#arrowhead);
+    }
+    .text-label, .title-text, .decision-label, .group-label {
+      font-family: "Segoe UI", "Calibri", sans-serif;
+      text-anchor: middle;
+      fill: #000080; /* Dark blue ink */
+    }
+    .title-text {
+        font-size: 28px;
+    }
+    .text-label {
+      font-size: 15px;
+    }
+    .decision-label {
+      font-size: 14px;
+      fill: #333;
+      text-anchor: start;
+    }
+    .group-label {
+      font-size: 16px;
+      text-anchor: start;
+      fill: #333;
+    }
+  </style>
+
+  <!-- Title -->
+  <text x="425" y="40" class="title-text">Activity Diagram</text>
+
+  <!-- Start Node -->
+  <circle cx="425" cy="80" r="12" fill="#333" />
+  <path d="M425 92 V 115" class="connector" />
+
+  <!-- Choose Subject -->
+  <rect x="325" y="115" width="200" height="40" rx="20" class="action" />
+  <text x="425" y="140" class="text-label">Choose Subject</text>
+  <path d="M425 155 V 175" class="connector" />
+
+  <!-- Start Learning Path -->
+  <rect x="325" y="175" width="200" height="40" rx="20" class="action" />
+  <text x="425" y="200" class="text-label">Start Learning Path</text>
+  <path d="M425 215 V 240" class="connector" />
+
+  <!-- Decision 1: Next topic in schedule? -->
+  <path d="M425 240 L495 280 L425 320 L355 280 Z" class="decision" />
+  <text x="425" y="270" class="text-label">Next topic</text>
+  <text x="425" y="290" class="text-label">in schedule?</text>
+  
+  <!-- YES branch from Decision 1 -->
+  <path d="M425 320 V 350" class="connector" />
+  <text x="430" y="340" class="decision-label">Yes</text>
+  
+  <!-- Platform Presents Topic -->
+  <rect x="325" y="350" width="200" height="40" rx="20" class="action" />
+  <text x="425" y="375" class="text-label">Platform Presents Topic</text>
+  <path d="M425 390 V 420" class="connector" />
+
+  <!-- Decision 2: More chunks for Topic? -->
+  <path d="M425 420 L495 460 L425 500 L355 460 Z" class="decision" />
+  <text x="425" y="450" class="text-label">More chunks</text>
+  <text x="425" y="470" class="text-label">for Topic</text>
+
+  <!-- NO branch from Decision 2 (to Final Quiz) -->
+  <path d="M355 460 H 225 V 520" class="connector" />
+  <text x="315" y="455" class="decision-label">No</text>
+  
+  <rect x="125" y="520" width="200" height="50" rx="20" class="action" />
+  <text x="225" y="540" class="text-label">Platform Presents</text>
+  <text x="225" y="560" class="text-label">Final Topic Quiz</text>
+  <path d="M225 570 V 595" class="connector" />
+  
+  <rect x="125" y="595" width="200" height="40" rx="20" class="action" />
+  <text x="225" y="620" class="text-label">Take Topic Quiz</text>
+  <path d="M225 635 V 680" class="connector" />
+
+  <!-- YES branch from Decision 2 (to Reinforcement) -->
+  <path d="M495 460 H 625 V 520" class="connector" />
+  <text x="505" y="455" class="decision-label">Yes</text>
+  
+  <rect x="525" y="520" width="200" height="40" rx="20" class="action" />
+  <text x="625" y="545" class="text-label">Display Next Content Chunk</text>
+  <path d="M625 560 V 585" class="connector" />
+
+  <rect x="525" y="585" width="200" height="50" rx="20" class="action" />
+  <text x="625" y="605" class="text-label">Platform Presents</text>
+  <text x="625" y="625" class="text-label">Reinforcement Quiz</text>
+  <path d="M625 635 V 660" class="connector" />
+
+  <rect x="525" y="660" width="200" height="40" rx="20" class="action" />
+  <text x="625" y="685" class="text-label">Answers the Quiz</text>
+  
+  <!-- AI Service group -->
+  <rect x="100" y="680" width="250" height="180" class="group-box" />
+  <text x="105" y="700" class="group-label">AI Service</text>
+  
+  <rect x="120" y="710" width="210" height="50" class="sub-action" />
+  <text x="225" y="730" class="text-label">AI Generate</text>
+  <text x="225" y="750" class="text-label">Score &amp; feedback</text>
+  <path d="M225 760 V 770" class="connector" />
+
+  <rect x="120" y="770" width="210" height="50" class="sub-action" />
+  <text x="225" y="790" class="text-label">AI Provides instant</text>
+  <text x="225" y="810" class="text-label">feedback</text>
+  <path d="M225 820 V 880" class="connector" />
+  <path d="M225 860 H 425 V 880" class="connector" marker-end="none"/>
+
+  <!-- Decision 3: Has Score Met? -->
+  <path d="M425 880 L495 920 L425 960 L355 920 Z" class="decision" />
+  <text x="425" y="910" class="text-label">Has</text>
+  <text x="425" y="930" class="text-label">Score Met?</text>
+
+  <!-- YES branch from Decision 3 -->
+  <path d="M425 960 V 990" class="connector" />
+  <text x="430" y="980" class="decision-label">Yes</text>
+  
+  <!-- AuraLearn Platform group -->
+  <rect x="320" y="990" width="210" height="100" class="group-box"/>
+  <text x="325" y="1005" class="group-label">AuraLearn Platform</text>
+  <rect x="335" y="1020" width="180" height="50" rx="20" class="action" />
+  <text x="425" y="1040" class="text-label">Mark topic as</text>
+  <text x="425" y="1060" class="text-label">mastered</text>
+
+  <!-- LOOPS AND END PATH -->
+  
+  <!-- Loop from mastered back to next topic decision -->
+  <path d="M335 1045 H 75 V 280 H 355" class="connector" />
+  
+  <!-- NO branch from Decision 3 (Score not met) -> Loop back to Present Topic -->
+  <path d="M495 920 H 550 V 375 H 525" class="connector" />
+  <text x="505" y="915" class="decision-label">No</text>
+
+  <!-- Loop from reinforcement quiz back to Present Topic -->
+  <path d="M725 680 H 750 V 375 H 525" class="connector" />
+
+  <!-- NO branch from Decision 1 (End Path) -->
+  <path d="M495 280 H 775 V 1150 H 425" class="connector" />
+  <text x="505" y="275" class="decision-label">No</text>
+  
+  <rect x="325" y="1150" width="200" height="40" rx="20" class="action" />
+  <text x="425" y="1175" class="text-label">End learning path</text>
+  <path d="M425 1190 V 1210" class="connector" />
+
+  <!-- End Node -->
+  <circle cx="425" cy="1230" r="15" stroke="#333" stroke-width="2" fill="none" />
+  <circle cx="425" cy="1230" r="10" fill="#333" />
+  
+</svg>

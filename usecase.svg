@@ -74,7 +74,7 @@
     </g>
     <text x="50" y="80" class="actor-label">Student</text>
   </g>
-
+  
   <!-- Use Cases -->
   <g id="uc-manage-subject" transform="translate(285, 70)">
     <ellipse cx="110" cy="21" rx="110" ry="21" class="use-case-shape"/>
